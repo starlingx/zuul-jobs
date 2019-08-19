@@ -1,0 +1,22 @@
+- project-template:
+    name: stx-api-ref-jobs
+    description: |
+      Build and publish api-ref document for starlingx.
+    check:
+      jobs:
+        - build-openstack-api-ref:
+            files: &api-ref-triggers
+              - ^os_api_ref/.*
+              - ^api-ref/.*
+              - ^doc/api_samples/.*
+              - bindep.txt
+              - doc/requirements.txt
+              - test-requirements.txt
+              - tox.ini
+    gate:
+      jobs:
+        - build-openstack-api-ref:
+            files: *api-ref-triggers
+    post:
+      jobs:
+        - publish-stx-api-ref
