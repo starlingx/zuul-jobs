@@ -20,3 +20,31 @@
     post:
       jobs:
         - publish-stx-api-ref
+
+- project-template:
+    name: publish-stx-docs
+    description: |
+      Runs and publishes documentation to starlingx site.
+    check:
+      jobs:
+        - openstack-tox-docs
+    gate:
+      jobs:
+        - openstack-tox-docs
+    post:
+      jobs:
+        - publish-stx-tox
+
+- project-template:
+    name: stx-release-notes-jobs
+    description: |
+      Runs the release notes test and publish jobs for starlingx.
+    check:
+      jobs:
+        - build-openstack-releasenotes
+    gate:
+      jobs:
+        - build-openstack-releasenotes
+    post:
+      jobs:
+        - publish-stx-releasenotes
