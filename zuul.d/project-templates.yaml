@@ -1,7 +1,7 @@
 - project-template:
     name: stx-api-ref-jobs
     description: |
-      Build and publish api-ref document for starlingx.
+      Build and publish api-ref document for StarlingX.
     check:
       jobs:
         - build-openstack-api-ref:
@@ -25,7 +25,7 @@
 - project-template:
     name: publish-stx-docs
     description: |
-      Runs and publishes documentation to starlingx site.
+      Runs and publishes documentation to StarlingX site.
     check:
       jobs:
         - openstack-tox-docs
@@ -39,7 +39,7 @@
 - project-template:
     name: stx-release-notes-jobs
     description: |
-      Runs the release notes test and publish jobs for starlingx.
+      Runs the release notes test and publish jobs for StarlingX.
     check:
       jobs:
         - build-openstack-releasenotes
@@ -49,3 +49,12 @@
     post:
       jobs:
         - publish-stx-releasenotes
+
+- project-template:
+    name: stx-lint-specfile-jobs
+    description: |
+      Lint RPM Specfiles for syntax and correctness
+    check:
+      jobs:
+        - stx-check-specfile:
+            voting: false

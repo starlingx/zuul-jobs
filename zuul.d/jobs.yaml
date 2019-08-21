@@ -15,3 +15,11 @@
       tox_envlist: linters
       tox_environment:
         ANSIBLE_ROLES_PATH: ~/src/opendev.org/starlingx/zuul-jobs/roles:~/src/opendev.org/opendev/base-jobs/roles:~/src/opendev.org/zuul/zuul-jobs/roles:~/src/opendev.org/openstack/openstack-zuul-jobs/roles:~/src/opendev.org/openstack/project-config/roles:~/src/opendev.org/opendev/system-config/roles
+
+- job:
+    name: stx-check-specfile
+    parent: tox
+    description: Sanity check RPM spec files
+    vars:
+      tox_envlist: rpm-packaging-lint
+    files: .*\.spec
