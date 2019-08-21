@@ -17,9 +17,10 @@
       jobs:
         - build-openstack-api-ref:
             files: *api-ref-triggers
-    post:
+    promote:
       jobs:
-        - publish-stx-api-ref
+        - promote-stx-api-ref:
+            files: *api-ref-triggers
 
 - project-template:
     name: publish-stx-docs
@@ -31,9 +32,9 @@
     gate:
       jobs:
         - openstack-tox-docs
-    post:
+    promote:
       jobs:
-        - publish-stx-tox
+        - promote-stx-tox-docs
 
 - project-template:
     name: stx-release-notes-jobs
