@@ -1,0 +1,17 @@
+- job:
+    name: stx-zuul-jobs-linters
+    parent: openstack-zuul-jobs-linters
+    description: |
+      This job runs against starlingx/zuul-jobs so we can properly
+      lint our ansible playbooks / roles.
+    required-projects:
+      - opendev/base-jobs
+      - openstack/openstack-zuul-jobs
+      - openstack/project-config
+      - opendev/system-config
+      - zuul/zuul-jobs
+      - zuul/zuul
+    vars:
+      tox_envlist: linters
+      tox_environment:
+        ANSIBLE_ROLES_PATH: ~/src/opendev.org/starlingx/zuul-jobs/roles:~/src/opendev.org/opendev/base-jobs/roles:~/src/opendev.org/zuul/zuul-jobs/roles:~/src/opendev.org/openstack/openstack-zuul-jobs/roles:~/src/opendev.org/openstack/project-config/roles:~/src/opendev.org/opendev/system-config/roles
