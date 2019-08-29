@@ -3,9 +3,7 @@
       - build-openstack-docs-pti
     check:
       jobs:
-        - openstack-tox-linters
-        - openstack-tox-pep8
+        - stx-zuul-jobs-linters
     gate:
       jobs:
-        - openstack-tox-linters
-        - openstack-tox-pep8
+        - stx-zuul-jobs-linters

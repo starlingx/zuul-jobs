@@ -58,3 +58,14 @@
       jobs:
         - stx-check-specfile:
             voting: false
+
+- project-template:
+    name: stx-build-rpms
+    description: |
+      Buiild RPMs via Ansible Playbook and OBS
+    check:
+      jobs:
+        - stx-obs-build-centos:
+            voting: false
+        - stx-obs-build-opensuse:
+            voting: false

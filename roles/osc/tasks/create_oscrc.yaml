@@ -1,0 +1,27 @@
+---
+# Create the _meta template file
+- name: oscrc - Zuul Block
+  block:
+  - name: Create osc config directory
+    file:
+      path: "/home/zuul/.config/osc"
+      state: directory
+      mode: 0755
+  - name: Template .oscrc
+    template:
+      src: oscrc.j2
+      dest: "/home/zuul/.config/osc/oscrc"
+  when: zuul is defined
+
+- name: oscrc - Non-Zuul Block
+  block:
+  - name: Create osc config directory
+    file:
+      path: "/root/.config/osc"
+      state: directory
+      mode: 0755
+  - name: Template .oscrc
+    template:
+      src: oscrc.j2
+      dest: "/root/.config/osc/oscrc"
+  when: zuul is not defined

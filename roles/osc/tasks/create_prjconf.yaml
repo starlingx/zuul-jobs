@@ -1,0 +1,18 @@
+---
+# Create the _meta template file
+- name: Create temporary _prjconf file
+  tempfile:
+    state: file
+    prefix: stx_prjconf.
+  register: stx_prjconf_file
+
+- name: Template _prjconf
+  template:
+    src: _prjconf-{{ target_distro }}.j2
+    dest: "{{ stx_prjconf_file.path }}"
+
+- name: Create prjconf via meta command
+  import_role:
+    name: osc
+  vars:
+    osc_options: meta prjconf -F {{ stx_prjconf_file.path }}

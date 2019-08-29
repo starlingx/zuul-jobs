@@ -1,0 +1,10 @@
+---
+- name: Fix up package_dir variable
+  set_fact:
+    package_dir: "{{ package_dir_orig | regex_replace('\\/\\.', '') }}"
+
+- name: Template _service
+  template:
+    src: _service.j2
+    dest: "{{ stx_pkg_tmpdir.path }}/{{ package_name }}/_service"
+

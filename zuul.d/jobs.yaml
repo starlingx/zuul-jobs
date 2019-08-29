@@ -23,3 +23,14 @@
     vars:
       tox_envlist: rpm-packaging-lint
     files: .*\.spec
+
+- job:
+    name: stx-obs-build-opensuse
+    nodeset: opensuse-150
+    run: playbooks/buildproject.yaml
+
+- job:
+    name: stx-obs-build-centos
+    nodeset: centos-7
+    run: playbooks/buildproject.yaml
+

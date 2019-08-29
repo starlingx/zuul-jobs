@@ -1,0 +1,64 @@
+- name: Install Centos OSC Command
+  block:
+  - name: Add OSC Repo
+    yum_repository:
+      name: opensuse_tools
+      description: openSUSE Tools for OSC and OBS
+      baseurl: http://download.opensuse.org/repositories/openSUSE:/Tools/CentOS_7
+      gpgcheck: no
+
+  - name: Install OSC
+    yum:
+      name:
+       - build
+       - obs-service-obs_scm
+       - obs-service-recompress
+       - obs-service-tar
+       - obs-service-tar_scm
+       - osc
+      state: present
+  when: target_distro == 'centos'
+  become: yes
+
+- name: Install openSUSE OSC
+  block:
+  - name: Install OSC
+    zypper:
+      name:
+       - build
+       - obs-service-obs_scm
+       - obs-service-recompress
+       - obs-service-tar
+       - obs-service-tar_scm
+       - osc
+      state: present
+      disable_recommends: no
+  when: target_distro == 'opensuse'
+  become: yes
+
+- name: Install Ubuntu OSC Command
+  block:
+  - name: Add Ubuntu Tools repository key
+    apt_key:
+      url: "http://download.opensuse.org/repositories/openSUSE:/Tools/xUbuntu_18.10/Release.key"
+
+  - name: Add Ubuntu Tools repo
+    apt_repository:
+      repo: "deb http://download.opensuse.org/repositories/openSUSE:/Tools/xUbuntu_18.10 bionic main"
+      state: present
+      update_cache: yes
+    ignore_errors: yes
+
+  - name: Update apt cache
+    apt:
+      update_cache: yes
+    ignore_errors: yes
+
+  - name: Install required software
+    package:
+      name:
+       - software-properties-common
+       - osc
+      state: present
+  when: target_distro == "ubuntu"
+  become: yes

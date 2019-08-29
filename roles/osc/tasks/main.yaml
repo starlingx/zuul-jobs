@@ -1,0 +1,8 @@
+---
+# Run OSC Command
+- name: Run OSC with options
+  command: osc {{ osc_options }}
+  args:
+    chdir: "{{ stx_pkg_tmpdir.path }}"
+  register: osc_result
+  #  register: "{{ osc_register }}"

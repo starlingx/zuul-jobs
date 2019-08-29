@@ -1,0 +1,8 @@
+---
+# Run OSC Command
+- name: Create OSC Freeze Link
+  import_role:
+    name: osc
+  vars:
+    osc_options: api -X POST /source/{{ test_project }}?cmd=freezelink
+  until: osc_result.stdout.find("status code=ok") != -1

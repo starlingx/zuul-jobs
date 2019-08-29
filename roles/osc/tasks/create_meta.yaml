@@ -1,0 +1,20 @@
+---
+# Create the _meta template file
+- name: Create temporary _meta file
+  tempfile:
+    state: file
+    prefix: stx_meta.
+  register: stx_meta_file
+- name: Print Debug output
+  debug:
+    msg:
+      - "{{ stx_meta_file.path }}"
+- name: Template _prj
+  template:
+    src: _prj-{{ target_distro }}.j2
+    dest: "{{ stx_meta_file.path }}"
+- name: Create OSC Repo
+  import_role:
+    name: osc
+  vars:
+    osc_options: api -T {{ stx_meta_file.path }} /source/{{ test_project }}/_meta

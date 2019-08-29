@@ -1,0 +1,29 @@
+---
+# Create the _meta template file
+- name: OSC Service
+  command: "osc service run"
+  args:
+    chdir: "{{ stx_pkg_tmpdir.path }}/{{ item }}"
+  with_items: "{{ sorted_dirs }}"
+- name: OSC Addremove
+  command: "osc addremove"
+  args:
+    chdir: "{{ stx_pkg_tmpdir.path }}/{{ item }}"
+  with_items: "{{ sorted_dirs }}"
+- name: OSC Commit
+  command: "osc commit -m CI-Build"
+  args:
+    chdir: "{{ stx_pkg_tmpdir.path }}"
+  ignore_errors: yes
+
+  # def osc_commit_all(workdir, packagename):
+  #    olddir = os.getcwd()
+  #  try:
+  #      os.chdir(os.path.join(workdir, packagename))
+  #      sh.osc('addremove')
+  #      for o in sh.osc('service', 'localrun', 'source_validator'):
+  #          if o.startswith('###ASK'):
+  #              sh.osc('rm', o.strip().split()[1])
+  #      sh.osc('commit', '--noservice', '-n')
+  #  finally:
+  #      os.chdir(olddir)
