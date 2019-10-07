@@ -1,0 +1,10 @@
+---
+# Create the _meta template file
+- name: OSC Link Packages
+  command: "osc linkpac {{ src_project }} {{ item }} {{ target_project }}-1.0"
+  args:
+    chdir: "{{ stx_pkg_tmpdir.path }}"
+  with_items: "{{ sorted_dirs }}"
+  #- name: Copy meta-data
+  #shell: ls -la {{ top_dir }}/save/{{ item }}/*.[cstp]* {{ stx_pkg_tmpdir.path }}/{{ item }} >> /tmp/list; cp  {{ top_dir }}/save/{{ item }}/*.[cstp]* {{ stx_pkg_tmpdir.path }}/{{ item }}
+  #with_items: "{{ sorted_dirs }}"

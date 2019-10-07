@@ -1,51 +1,12 @@
 ---
-# Create the _meta template file
-#- name: OSC detachbranch
-#  command: "osc detachbranch {{ test_project }} {{ item }}"
-#  args:
-#    chdir: "{{ stx_pkg_tmpdir.path }}"
-#  with_items: "{{ sorted_dirs }}"
-#- name: Remove directory
-#  file:
-#    path: "{{ stx_pkg_tmpdir.path }}/{{ item }}"
-#    state: absent
-#  with_items: "{{ sorted_dirs }}"
-#- name: OSC Checkout
-#  command: "osc checkout {{ item }}"
-#  args:
-#    chdir: "{{ stx_pkg_tmpdir.path }}"
-#  with_items: "{{ sorted_dirs }}"
-- name: Restore meta-data
-  shell: cp {{ src_dir }}/{{ item }}/{{ target_distro }}/*[.cpst]* {{ stx_pkg_tmpdir.path }}/{{ item }}
+- name: OSC Checkout
+  command: "osc checkout {{ item }}"
+  args:
+    chdir: "{{ stx_pkg_tmpdir.path }}"
   with_items: "{{ sorted_dirs }}"
-#- name: OSC AddRemove
-#  command: "osc addremove"
-#  args:
-#    chdir: "{{ stx_pkg_tmpdir.path }}/{{ item }}"
-#  with_items: "{{ sorted_dirs }}"
-#- name: OSC Commit
-#  command: "osc commit"
-#  args:
-#    chdir: "{{ stx_pkg_tmpdir.path }}/{{ item }}"
-#  with_items: "{{ sorted_dirs }}"
-  #
-  #def osc_detachbranch(workdir, project, pkgname):
-  #    olddir = os.getcwd()
-  #  try:
-  #      os.chdir(os.path.join(workdir))
-  #      sh.osc('detachbranch', project, pkgname)
-  #      os.mkdir(pkgname + '.b')
-  #      for f in glob.glob(os.path.join(pkgname, '*')):
-  #          os.rename(f, os.path.join(pkgname + '.b', os.path.basename(f)))
-  #      sh.rm('-rf', pkgname)
-  #      sh.osc('co', pkgname)
-  #      for f in glob.glob(os.path.join(pkgname + '.b', '*')):
-  #          dst = os.path.basename(f)
-  #          try:
-  #              os.unlink(os.path.join(pkgname, dst))
-  #          except OSError:
-  #              pass
-  #          os.rename(f, os.path.join(pkgname, dst))
-  #      os.rmdir(pkgname + '.b')
-  #  finally:
-  #      os.chdir(olddir)
+
+- name: Detach branch
+  command: "osc detachbranch"
+  args:
+    chdir: "{{ stx_pkg_tmpdir.path }}/{{ item }}"
+  with_items: "{{ sorted_dirs }}"

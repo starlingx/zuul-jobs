@@ -115,8 +115,6 @@
     - debug:
         msg: "{{ repo_name }}: {{ repo_dir }} "
 
-    - meta: end_play
-
     - name: List spec files
       debug:
         msg: "Specfile List: {{ specfiles }}"
@@ -135,30 +133,15 @@
         msg: "Sorted Directories: {{ item }}"
       with_items: "{{ sorted_dirs }}"
 
-    - name: OSC mkpac
+    - name: OSC Link Package
       import_role:
         name: osc
-        tasks_from: mkpac
+        tasks_from: linkpackage
 
     - name: OSC detachbranch
       import_role:
         name: osc
         tasks_from: detachbranch
-
-    - name: Create Service file
-      include_role:
-        name: osc
-        tasks_from: create_service
-      vars:
-        package_dir_orig: "{{ package_name }}/{{ lookup('ini', 'SRC_DIR type=properties file=/fault/' + package_name + '/centos/build_srpm.data') | regex_replace('\"', '') | regex_replace('\\/\\.', '') }}"
-      with_items: "{{ sorted_dirs }}"
-      loop_control:
-        loop_var: package_name
-
-    - name: OSC commit
-      import_role:
-        name: osc
-        tasks_from: commit
 
 #        pushd ./out
 #        sleep 5
