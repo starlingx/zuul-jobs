@@ -1,6 +1,4 @@
 - project:
-    templates:
-      - build-openstack-docs-pti
     check:
       jobs:
         - stx-zuul-jobs-linters
