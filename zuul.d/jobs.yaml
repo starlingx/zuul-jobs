@@ -34,3 +34,19 @@
     nodeset: centos-7
     run: playbooks/buildproject.yaml
 
+- job:
+    name: stx-tox-bandit-static-scan
+    parent: tox
+    description: |
+      Static code scan of .py files for unknown Severity HIGH issues
+    vars:
+      tox_envlist: bandit
+    files: .*\.py
+    irrelevant-files:
+      - ^test-requirements.txt$
+      - ^.*\.rst$
+      - ^doc/.*$
+      - ^releasenotes/.*$
+      - ^setup.cfg$
+      - ^tools/(?!bandit.yml).*$
+      - ^tox.ini$

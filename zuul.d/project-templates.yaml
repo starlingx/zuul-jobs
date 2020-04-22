@@ -69,3 +69,13 @@
             voting: false
         - stx-obs-build-opensuse:
             voting: false
+
+- project-template:
+    name: stx-bandit-jobs
+    description: |
+      Bandit code scanning jobs
+    check:
+      jobs:
+        - stx-tox-bandit-static-scan:
+            voting: false
+
