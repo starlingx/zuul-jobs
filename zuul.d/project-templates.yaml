@@ -42,10 +42,14 @@
       Runs the release notes test and publish jobs for StarlingX.
     check:
       jobs:
-        - build-openstack-releasenotes
+        - build-openstack-releasenotes:
+            vars:
+              sphinx_python: python3
     gate:
       jobs:
-        - build-openstack-releasenotes
+        - build-openstack-releasenotes:
+            vars:
+              sphinx_python: python3
     post:
       jobs:
         - publish-stx-releasenotes
