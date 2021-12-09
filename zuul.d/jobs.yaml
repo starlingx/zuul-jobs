@@ -11,6 +11,7 @@
       - opendev/system-config
       - zuul/zuul-jobs
       - zuul/zuul
+    nodeset: ubuntu-bionic
     vars:
       tox_envlist: linters
       tox_environment:
