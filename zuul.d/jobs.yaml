@@ -10,11 +10,11 @@
       - openstack/project-config
       - opendev/system-config
       - zuul/zuul-jobs
-      - zuul/zuul
     nodeset: ubuntu-bionic
     vars:
       tox_envlist: linters
       tox_environment:
+        #ANSIBLE_ROLES_PATH={env:ANSIBLE_ROLES_PATH:../zuul-jobs/roles:../openstack-zuul-jobs/roles:roles}
         ANSIBLE_ROLES_PATH: ~/src/opendev.org/starlingx/zuul-jobs/roles:~/src/opendev.org/opendev/base-jobs/roles:~/src/opendev.org/zuul/zuul-jobs/roles:~/src/opendev.org/openstack/openstack-zuul-jobs/roles:~/src/opendev.org/openstack/project-config/roles:~/src/opendev.org/opendev/system-config/roles
 
 - job:
