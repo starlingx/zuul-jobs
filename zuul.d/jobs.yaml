@@ -40,3 +40,17 @@
       - ^releasenotes/.*$
       - ^setup.cfg$
       - ^tox.ini$
+
+- job:
+    name: stx-tox-linters
+    parent: openstack-tox-linters
+    description: |
+      Run Tox linters on debian-bullseye
+    nodeset: debian-bullseye
+
+- job:
+    name: stx-tox-pep8
+    parent: openstack-tox-pep8
+    description: |
+      Run Tox pep8 tests on debian-bullseye
+    nodeset: debian-bullseye
