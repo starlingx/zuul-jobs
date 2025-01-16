@@ -26,16 +26,6 @@
     files: .*\.spec
 
 - job:
-    name: stx-obs-build-opensuse
-    nodeset: opensuse-15
-    run: playbooks/buildproject.yaml
-
-- job:
-    name: stx-obs-build-centos
-    nodeset: centos-7
-    run: playbooks/buildproject.yaml
-
-- job:
     name: stx-tox-bandit-static-scan
     parent: tox
     description: |
@@ -49,5 +39,4 @@
       - ^doc/.*$
       - ^releasenotes/.*$
       - ^setup.cfg$
-      - ^tools/(?!bandit.yml).*$
       - ^tox.ini$
