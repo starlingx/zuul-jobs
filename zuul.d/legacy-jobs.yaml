@@ -43,3 +43,4 @@
       - ^releasenotes/.*$
       - ^setup.cfg$
       - ^tox.ini$
+    nodeset: debian-bullseye

@@ -14,3 +14,10 @@
     description: |
       Run Tox pep8 tests on debian-bullseye
     nodeset: debian-bullseye
+
+- job:
+    name: starlingx-common-tox-pylint
+    parent: openstack-tox-pylint
+    description: |
+      Run Tox pylint tests on debian-bullseye
+    nodeset: debian-bullseye
