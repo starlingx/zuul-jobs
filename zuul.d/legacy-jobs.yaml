@@ -1,0 +1,53 @@
+#
+# These jobs are deprecated, please use the ones in jobs.yaml
+#
+- job:
+    name: stx-zuul-jobs-linters
+    parent: openstack-zuul-jobs-linters
+    description: |
+      This job runs against starlingx/zuul-jobs so we can properly
+      lint our ansible playbooks / roles.
+    required-projects:
+      - opendev/base-jobs
+      - openstack/openstack-zuul-jobs
+      - openstack/project-config
+      - opendev/system-config
+      - zuul/zuul-jobs
+    nodeset: ubuntu-bionic
+    vars:
+      tox_envlist: linters
+      tox_environment:
+        #ANSIBLE_ROLES_PATH={env:ANSIBLE_ROLES_PATH:../zuul-jobs/roles:../openstack-zuul-jobs/roles:roles}
+        ANSIBLE_ROLES_PATH: ~/src/opendev.org/starlingx/zuul-jobs/roles:~/src/opendev.org/opendev/base-jobs/roles:~/src/opendev.org/zuul/zuul-jobs/roles:~/src/opendev.org/openstack/openstack-zuul-jobs/roles:~/src/opendev.org/openstack/project-config/roles:~/src/opendev.org/opendev/system-config/roles
+
+- job:
+    name: stx-check-specfile
+    parent: tox
+    description: Sanity check RPM spec files
+    vars:
+      tox_envlist: rpm-packaging-lint
+    files: .*\.spec
+
+- job:
+    name: stx-tox-bandit-static-scan
+    parent: tox
+    description: |
+      Static code scan of .py files for unknown Severity HIGH issues
+    vars:
+      tox_envlist: bandit
+    files: .*\.py
+    irrelevant-files:
+      - ^test-requirements.txt$
+      - ^.*\.rst$
+      - ^doc/.*$
+      - ^releasenotes/.*$
+      - ^setup.cfg$
+      - ^tox.ini$
+
+- job:
+    name: stx-tox-linters
+    parent: starlingx-common-tox-linters
+
+- job:
+    name: stx-tox-pep8
+    parent: starlingx-common-tox-linters
