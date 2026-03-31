@@ -13,7 +13,7 @@
       - openstack/project-config
       - opendev/system-config
       - zuul/zuul-jobs
-    nodeset: ubuntu-bionic
+    nodeset: debian-bullseye
     vars:
       tox_envlist: linters
       tox_environment:
