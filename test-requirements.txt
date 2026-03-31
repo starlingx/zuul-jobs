@@ -2,10 +2,10 @@
 # of appearance. Changing the order has an impact on the overall integration
 # process, which may cause wedges in the gate later.
 
-hacking>=1.1.0,<1.2 # Apache-2.0
+hacking>=3.0,<4 # Apache-2.0
 
 zuul
-ansible>=2.7.0,<2.8
-ansible-lint<4
+ansible>=2.9.0,<2.10
+ansible-lint>=5.0,<6
 bashate>=0.2
 zuul-sphinx>=0.2.0
