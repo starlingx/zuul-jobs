@@ -5,3 +5,6 @@
     gate:
       jobs:
         - stx-zuul-jobs-linters
+    post:
+      jobs:
+        - stx-zuul-jobs-upload-git-mirror
