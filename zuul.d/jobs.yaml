@@ -14,7 +14,7 @@
     vars:
       tox_envlist: linters
       tox_environment:
-        ANSIBLE_ROLES_PATH: ~/src/opendev.org/starlingx/zuul-jobs/roles:~/src/opendev.org/opendev/base-jobs/roles:~/src/opendev.org/zuul/zuul-jobs/roles:~/src/opendev.org/openstack/openstack-zuul-jobs/roles:~/src/opendev.org/openstack/project-config/roles:~/src/opendev.org/opendev/system-config/roles
+        ANSIBLE_ROLES_PATH: ~/src/opendev.org/opendev/base-jobs/roles:~/src/opendev.org/zuul/zuul-jobs/roles:~/src/opendev.org/openstack/openstack-zuul-jobs/roles:~/src/opendev.org/openstack/project-config/roles:~/src/opendev.org/opendev/system-config/roles
 
 - job:
     name: stx-check-specfile
@@ -23,16 +23,6 @@
     vars:
       tox_envlist: rpm-packaging-lint
     files: .*\.spec
-
-- job:
-    name: stx-obs-build-opensuse
-    nodeset: opensuse-15
-    run: playbooks/buildproject.yaml
-
-- job:
-    name: stx-obs-build-centos
-    nodeset: centos-7
-    run: playbooks/buildproject.yaml
 
 - job:
     name: stx-tox-bandit-static-scan
