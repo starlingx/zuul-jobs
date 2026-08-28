@@ -38,5 +38,5 @@
       - ^doc/.*$
       - ^releasenotes/.*$
       - ^setup.cfg$
-      - ^tools/(?!bandit.yml).*$
+      - ^tools/.*$
       - ^tox.ini$
