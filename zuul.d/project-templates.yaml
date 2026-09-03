@@ -58,3 +58,13 @@
       jobs:
         - stx-check-specfile:
             voting: false
+
+- project-template:
+    name: stx-build-rpms
+    description: |
+      Deprecated no-op stub. The OBS/RPM build jobs
+      (stx-obs-build-opensuse, stx-obs-build-centos) were removed, but this
+      empty template is retained so existing consumers on r/stx.3.0
+      (e.g. starlingx/config, starlingx/fault) continue to parse.
+    check:
+      jobs: []
